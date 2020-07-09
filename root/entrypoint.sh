@@ -127,7 +127,7 @@ ls -d1 tf-*
 
 for dir in "$(ls -d1 tf-*)"; do
     echo "Entering $dir"
-    pushd $dir
+    cd $dir
     terraform_init
     terraform_fmt
     terraform_plan
@@ -135,5 +135,5 @@ for dir in "$(ls -d1 tf-*)"; do
         [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ] && [ "$GITHUB_EVENT_INPUTS_ACTION" == "apply" ]; then
         terraform_apply
     fi
-    popd
+    cd ..
 done
