@@ -29,6 +29,7 @@ install_terraform() {
 }
 
 parse_initial_azure_credentials() {
+    echo "Parse AZURE_CREDENTIALS"
     if [ ! "$AZURE_CREDENTIALS" ]; then exit_abnormal "AZURE_CREDENTIALS not defined"; fi
     INITIAL_ARM_CLIENT_ID=$(echo $AZURE_CREDENTIALS | jq -r .clientId)
     INITIAL_ARM_CLIENT_SECRET=$(echo $AZURE_CREDENTIALS | jq -r .clientSecret)
@@ -47,6 +48,7 @@ parse_initial_azure_credentials() {
 }
 
 get_azure_access_token() {
+    echo "Get Azure access token"
     AZURE_ACCESS_TOKEN=$(curl -s -X POST \
         -d "grant_type=client_credentials&client_id=${INITIAL_ARM_CLIENT_ID}&client_secret=${INITIAL_ARM_CLIENT_SECRET}&resource=https://vault.azure.net" \
         $INITIAL_ACTIVE_DIRECTORY_ENDPOINT_URL/$INITIAL_ARM_TENANT_ID/oauth2/token | jq -r .access_token)
@@ -54,6 +56,7 @@ get_azure_access_token() {
 }
 
 get_keyvault_secrets() {
+    echo "Get Key Vault secrets"
     ARM_CLIENT_ID=$(curl -s "https://${KEYVAULT_NAME}.vault.azure.net/secrets/arm-client-id?api-version=7.0" \
         -H "Authorization: Bearer ${AZURE_ACCESS_TOKEN}" \
         | jq -r '.value')
@@ -79,6 +82,7 @@ get_keyvault_secrets() {
 }
 
 create_tf_backend_file() {
+    echo "Create backend file"
     cat << EOF >backend.hcl
 $TF_BACKEND_FILE
 EOF
@@ -88,19 +92,23 @@ EOF
 }
 
 terraform_init() {
+    echo "Terraform init"
     ln -s ../backend.hcl
     terraform init -backend-config=backend.hcl -input=false
 }
 
 terraform_fmt() {
+    echo "Terraform fmt -check"
     terraform fmt -check
 }
 
 terraform_plan() {
+    echo "Terraform plan"
     terraform plan -input=false
 }
 
 terraform_apply() {
+    echo "Terraform apply"
     terraform apply -auto-approve -input=false
 }
 
