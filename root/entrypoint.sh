@@ -114,12 +114,16 @@ terraform_apply() {
 
 
 # Start here
-
+echo "Beginning AzOpsTFRun"
+echo "Current directory: $(pwd)"
 install_terraform
 parse_initial_azure_credentials
 get_azure_access_token
 get_keyvault_secrets
 create_tf_backend_file
+
+echo "Evaluating tf directories:"
+ls -d1 tf-*
 
 for dir in "$(ls -d1 tf-*)"; do
     echo "Entering $dir"
