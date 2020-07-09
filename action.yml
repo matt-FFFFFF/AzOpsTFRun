@@ -1,0 +1,13 @@
+name: "AzOpsTFRun"
+description: "-"
+author: "matt-FFFFFF"
+inputs:
+  mode:
+    description: "AzOps Mode"
+    required: true
+runs:
+  using: "docker"
+  image: "docker://mattffffff/azopstfrun:main"
+branding:
+  icon: 'package'
+  color: 'blue'
