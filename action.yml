@@ -3,7 +3,7 @@ description: "-"
 author: "matt-FFFFFF"
 runs:
   using: "docker"
-  image: "docker://mattffffff/azopstfrun:v1.0"
+  image: "docker://mattffffff/azopstfrun:main"
 branding:
   icon: 'package'
   color: 'blue'
