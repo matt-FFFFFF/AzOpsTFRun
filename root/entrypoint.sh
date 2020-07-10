@@ -135,6 +135,7 @@ for dir in $(ls -d1 tf-*); do
     echo "Entering $dir"
     cd $dir
     terraform_init
+    terraform workspace new $dir || terraform workspace select $dir
     terraform_fmt
     terraform_plan
     if [ "$GITHUB_REF" == "refs/heads/main" ] && [ "$GITHUB_EVENT_NAME" == "push" ] \
