@@ -66,7 +66,7 @@ get_keyvault_secrets() {
     ARM_TENANT_ID=$(curl -s "https://${KEYVAULT_NAME}.vault.azure.net/secrets/arm-tenant-id?api-version=7.0" \
         -H "Authorization: Bearer ${AZURE_ACCESS_TOKEN}" \
         | jq -r '.value')
-    ARM_SUBSCRIPTION_ID=$(curl -s "https://${KEYVAULT_NAME}.vault.azure.net/secrets/arm-tenant-id?api-version=7.0" \
+    ARM_SUBSCRIPTION_ID=$(curl -s "https://${KEYVAULT_NAME}.vault.azure.net/secrets/arm-subscription-id?api-version=7.0" \
         -H "Authorization: Bearer ${AZURE_ACCESS_TOKEN}" \
         | jq -r '.value')
     TF_BACKEND_FILE=$(curl -s "https://${KEYVAULT_NAME}.vault.azure.net/secrets/tf-backend-file?api-version=7.0" \
