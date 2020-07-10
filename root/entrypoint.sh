@@ -123,6 +123,11 @@ get_azure_access_token
 get_keyvault_secrets
 create_tf_backend_file
 
+export ARM_CLIENT_ID
+export ARM_CLIENT_SECRET
+export ARM_SUBSCRIPTION_ID
+export ARM_TENANT_ID
+
 echo "Evaluating tf directories:"
 ls -d1 tf-*
 
