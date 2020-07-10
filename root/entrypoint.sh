@@ -112,8 +112,9 @@ terraform_apply() {
     terraform apply -auto-approve -input=false
 }
 
-
+###############################################################################
 # Start here
+
 echo "Beginning AzOpsTFRun"
 echo "Current directory: $(pwd)"
 install_terraform
@@ -125,7 +126,7 @@ create_tf_backend_file
 echo "Evaluating tf directories:"
 ls -d1 tf-*
 
-for dir in "$(ls -d1 tf-*)"; do
+for dir in $(ls -d1 tf-*); do
     echo "Entering $dir"
     cd $dir
     terraform_init
