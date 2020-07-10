@@ -122,6 +122,9 @@ terraform_apply() {
 
 echo "Beginning AzOpsTFRun"
 echo "Current directory: $(pwd)"
+echo "GitHub ref: $GITHUB_REF"
+echo "GitHub event: $GITHUB_EVENT_NAME"
+echo "GitHub event 'action' input: $GITHUB_EVENT_INPUTS_ACTION"
 install_terraform
 parse_initial_azure_credentials
 get_azure_access_token
