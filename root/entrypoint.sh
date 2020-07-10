@@ -137,9 +137,11 @@ for dir in $(ls -d1 tf-*); do
     terraform_init
     terraform_fmt
     terraform_plan
-    if [ "$GITHUB_REF" == "refs/heads/main" ] && [ $GITHUB_EVENT_NAME == "push" ] \
-        [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ] && [ "$GITHUB_EVENT_INPUTS_ACTION" == "apply" ]; then
+    if [ "$GITHUB_REF" == "refs/heads/main" ] && [ "$GITHUB_EVENT_NAME" == "push" ] \
+       || [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ] && [ "$GITHUB_EVENT_INPUTS_ACTION" == "apply" ]; then
         terraform_apply
+    else
+        echo "Not running apply stage"
     fi
     cd ..
 done
